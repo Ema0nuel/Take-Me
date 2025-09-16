@@ -12,8 +12,26 @@ export class Router {
 
     init(container) {
         this.container = container;
+
+        // Show splash screen on first load
+        if (this.isFirstLoad) {
+            const splash = new Splash();
+            splash.mount(this.container);
+
+            // Remove splash after animation
+            setTimeout(() => {
+                splash.unmount();
+                this.handleRoute();
+                this.isFirstLoad = false;
+            }, 2000); // Adjust timing as needed
+        }
+
         window.addEventListener('hashchange', () => this.handleRoute());
-        this.handleRoute();
+
+        // Only handle route if not first load
+        if (!this.isFirstLoad) {
+            this.handleRoute();
+        }
     }
 
     handleRoute() {
