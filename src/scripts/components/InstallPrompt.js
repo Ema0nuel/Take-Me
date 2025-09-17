@@ -19,8 +19,8 @@ export default class InstallPrompt {
         banner.innerHTML = `
             <div class="install-banner-content">
                 <div class="install-banner-text">
-                    <strong>Install Take Me Notes</strong>
-                    <span>Install Mobile experience</span>
+                    <span class="text-black-color">Install Take Me Notes</span>
+                    <span>on your mobile</span>
                 </div>
                 <div class="install-banner-buttons">
                     <button class="install-button">Install</button>

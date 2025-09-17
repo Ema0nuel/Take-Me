@@ -4,8 +4,8 @@
   "description": "A simple note-taking PWA",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "transparent",
+  "theme_color": "transparent",
   "icons": [
     {
       "src": "./icons/icon-192x192.png",

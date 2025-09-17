@@ -337,7 +337,7 @@ html {
     gap: 1rem;
   }
   .note-card {
-    margin: 0 8px;
+    margin: 0;
     border-radius: 12px;
     font-size: 1rem;
     padding: 0.75rem;
@@ -716,4 +716,9 @@ select {
   .header-title {
     color: var(--text-color);
   }
+}
+.text-black-color {
+  color: #0000;
+  font-size: 16px;
+  font-weight: 600;
 }

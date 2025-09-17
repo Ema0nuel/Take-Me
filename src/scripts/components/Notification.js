@@ -100,4 +100,4 @@ export default class NotificationManager {
 
         await this.sendNotification('Note Updated', options);
     }
-}
+} // Test
