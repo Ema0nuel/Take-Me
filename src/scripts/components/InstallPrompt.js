@@ -20,7 +20,7 @@ export default class InstallPrompt {
             <div class="install-banner-content">
                 <div class="install-banner-text">
                     <strong>Install Take Me Notes</strong>
-                    <span>Add to your home screen for quick access</span>
+                    <span>Install Mobile experience</span>
                 </div>
                 <div class="install-banner-buttons">
                     <button class="install-button">Install</button>
