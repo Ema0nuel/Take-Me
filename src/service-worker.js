@@ -52,3 +52,29 @@ self.addEventListener('install', () => {
 self.addEventListener('activate', (event) => {
     event.waitUntil(clients.claim())
 })
+
+// Handle notification clicks
+self.addEventListener('notificationclick', (event) => {
+    event.notification.close();
+
+    const notificationData = event.notification.data;
+    let urlToOpen = new URL('/', self.location.origin).href;
+
+    // Handle different notification actions
+    if (event.action === 'view' && notificationData.noteId) {
+        urlToOpen = new URL(`/#/notes/${notificationData.noteId}`, self.location.origin).href;
+    }
+
+    event.waitUntil(
+        clients.matchAll({ type: 'window' }).then(windowClients => {
+            // Check if there is already a window/tab open with the target URL
+            for (let client of windowClients) {
+                if (client.url === urlToOpen && 'focus' in client) {
+                    return client.focus();
+                }
+            }
+            // If no window/tab is open, open a new one
+            return clients.openWindow(urlToOpen);
+        })
+    );
+});

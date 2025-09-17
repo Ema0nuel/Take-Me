@@ -26,5 +26,8 @@
     "workbox-routing": "^7.3.0",
     "workbox-strategies": "^7.3.0",
     "workbox-webpack-plugin": "^7.3.0"
+  },
+  "dependencies": {
+    "toastify-js": "^1.12.0"
   }
 }

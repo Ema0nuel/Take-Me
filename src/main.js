@@ -1,6 +1,37 @@
 import './assets/css/style.css';
 import './assets/css/custom.css';
 import App from './App.js';
+import NetworkStatus from './scripts/components/NetworkStatus';
+import NotificationManager from './scripts/components/Notification';
+import InstallPrompt from './scripts/components/InstallPrompt';
+
+// Initialize install prompt
+const installPrompt = new InstallPrompt();
+
+// Initialize network status monitoring
+const networkStatus = new NetworkStatus();
+
+// Register service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', async () => {
+    try {
+      const registration = await navigator.serviceWorker.register('/service-worker.js');
+      console.log('ServiceWorker registration successful');
+
+      // Request notification permission after service worker is ready
+      await NotificationManager.requestPermission();
+    } catch (error) {
+      console.error('ServiceWorker registration failed:', error);
+    }
+  });
+}
+
+// Example of sending a notification
+document.getElementById('notify-btn')?.addEventListener('click', () => {
+  NotificationManager.sendNotification('Hello!', {
+    body: 'This is a test notification'
+  });
+});
 
 // Register service worker
 if ('serviceWorker' in navigator) {
