@@ -70,9 +70,38 @@ export class HomeView extends Component {
         `;
     }
 
-    afterMount() {
-        this.element.querySelectorAll('.note-card').forEach(card => {
-            // Handle click events
+    aafterMount() {
+        const cards = this.element.querySelectorAll('.note-card');
+
+        cards.forEach(card => {
+            // Handle iOS touch events
+            let touchStartTime;
+            let touchEndTime;
+
+            card.addEventListener('touchstart', (e) => {
+                touchStartTime = new Date().getTime();
+            }, { passive: true });
+
+            card.addEventListener('touchend', (e) => {
+                touchEndTime = new Date().getTime();
+                const touchDuration = touchEndTime - touchStartTime;
+
+                // Only trigger if touch duration is less than 300ms
+                if (touchDuration < 300) {
+                    e.preventDefault();
+                    const deleteBtn = e.target.closest('.delete-note');
+
+                    if (deleteBtn) {
+                        const noteId = deleteBtn.dataset.noteId;
+                        this.handleDeleteNote(noteId);
+                    } else {
+                        const noteId = card.dataset.noteId;
+                        this.handleNoteClick(noteId);
+                    }
+                }
+            }, { passive: false });
+
+            // Keep click handler for desktop
             card.addEventListener('click', (e) => {
                 if (e.target.closest('.delete-note')) {
                     e.stopPropagation();
@@ -83,19 +112,7 @@ export class HomeView extends Component {
                     this.handleNoteClick(noteId);
                 }
             });
-
-            // Handle keyboard events for accessibility
-            card.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    const noteId = card.dataset.noteId;
-                    this.handleNoteClick(noteId);
-                }
-            });
         });
-
-        // Add touch feedback
-        this.element.addEventListener('touchstart', () => { }, { passive: true });
     }
 
     handleNoteClick(noteId) {
