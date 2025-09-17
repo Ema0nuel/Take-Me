@@ -41,6 +41,14 @@ html {
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
 }
+#app {
+  padding-bottom: env(
+    safe-area-inset-bottom
+  ); /* handle iPhone X+ notch/home bar */
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
 
 /* App container */
 .app-container {

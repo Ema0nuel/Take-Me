@@ -5,6 +5,13 @@ import NetworkStatus from './scripts/components/NetworkStatus';
 import NotificationManager from './scripts/components/Notification';
 import InstallPrompt from './scripts/components/InstallPrompt';
 
+document.addEventListener('touchmove', function (e) {
+  // prevent accidental horizontal swipe-back navigation
+  if (e.touches.length === 1 && e.changedTouches[0].clientX < 30) {
+    e.preventDefault();
+  }
+}, { passive: false });
+
 // Initialize install prompt
 const installPrompt = new InstallPrompt();
 
