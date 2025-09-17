@@ -717,36 +717,3 @@ select {
     color: var(--text-color);
   }
 }
-
-/* iOS-specific styles */
-.note-card {
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: transparent;
-  transform: translateZ(0);
-  cursor: pointer;
-}
-
-/* iOS install banner specific styles */
-.ios-install {
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
-.install-banner {
-  padding-bottom: env(safe-area-inset-bottom);
-  transform: translateY(100%);
-}
-
-.install-banner.show {
-  transform: translateY(0);
-}
-
-@supports (-webkit-touch-callout: none) {
-  .note-card {
-    /* Improve touch feedback on iOS */
-    transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
-  }
-
-  .note-card:active {
-    transform: scale(0.96);
-  }
-}
